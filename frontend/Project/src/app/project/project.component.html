@@ -1,0 +1,28 @@
+<p>project works!</p>
+<h1 class="text-center">Timely</h1>
+<app-button color="{{ clicked ? 'red' : 'green' }}"
+text="{{ clicked ? 'Stop' : 'Start' }}" (btnClick)="onStartStop()"></app-button>
+<div class ="container">
+    <div class = "card">
+        <h3 class="text-center"> Project List</h3>
+        <div class = "card-body">
+            <table class="table table-striped" id="excel-table">
+                <thead>
+                    <th>Name</th>
+                    <th> Start</th>
+                    <th> Stop</th>
+                    <th> Duration</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let project of projects">
+                        <td> {{project.projectName}}</td>
+                        <td> {{project.projectStart}}</td>
+                        <td> {{project.projectStop}}</td>
+                        <td> {{project.projectDuration}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<button class="btn btn-success" type="button" (click)="ExportToExcel()">Export to excel</button>

@@ -1,0 +1,11 @@
+<p>dialog works!</p>
+<div mat-dialog-content>
+    <p>Project name:</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.projectName" placeholder="Project name">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions >
+      <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data.projectName" cdkFocusInitial>Ok</button>
+  </div>
