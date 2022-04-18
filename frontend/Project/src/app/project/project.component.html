@@ -1,4 +1,3 @@
-<p>project works!</p>
 <h1 class="text-center">Timely</h1>
 <app-button color="{{ clicked ? 'red' : 'green' }}"
 text="{{ clicked ? 'Stop' : 'Start' }}" (btnClick)="onStartStop()"></app-button>
@@ -12,6 +11,8 @@ text="{{ clicked ? 'Stop' : 'Start' }}" (btnClick)="onStartStop()"></app-button>
                     <th> Start</th>
                     <th> Stop</th>
                     <th> Duration</th>
+                    <th> Info</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     <tr *ngFor = "let project of projects">
@@ -19,10 +20,20 @@ text="{{ clicked ? 'Stop' : 'Start' }}" (btnClick)="onStartStop()"></app-button>
                         <td> {{project.projectStart}}</td>
                         <td> {{project.projectStop}}</td>
                         <td> {{project.projectDuration}}</td>
+                        <td><button (click)="onDelete(project)" class="btn btn-danger">Delete</button></td>
+                        <div style="display: inline-block;">
+                            <td>
+                                <div>Edit</div>
+                                <input type="datetime-local" id="editStartId" class="form-control">
+                                <input type="datetime-local" id="editStopId" class="form-control">
+                                <button (click)="dohvacanje(project)" class="btn btn-info">Edit</button>
+                            </td>
+                        </div>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-<button class="btn btn-success" type="button" (click)="ExportToExcel()">Export to excel</button>
+
+

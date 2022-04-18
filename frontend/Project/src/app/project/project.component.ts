@@ -6,7 +6,6 @@ import { ProjectService } from '../service/project.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import * as XLSX from 'xlsx';
 
-
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -26,6 +25,8 @@ export class ProjectComponent implements OnInit {
 
   constructor(private projectService: ProjectService, public dialog: MatDialog) { }
 
+  
+
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
@@ -39,7 +40,8 @@ export class ProjectComponent implements OnInit {
         this.projectStart = new Date()
         this.projects.pop();
         
-        let diffMs = this.projectStop.getTime() - this.projectStart.getTime(); // milliseconds
+        //let diffMs = this.projectStop.getTime() - this.projectStart.getTime(); // milliseconds
+        let diffMs = (new Date().getTime()) - this.projectStart.getTime(); // milliseconds
         let diffDays = Math.floor(diffMs / 86400000); // days
         let diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
         let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
@@ -78,12 +80,20 @@ export class ProjectComponent implements OnInit {
       
     }
   }
-  onDelete(project:Project) {
+  onDelete(project:any) {
     this.projectService
       .deleteProject(project)
       .subscribe(
         () => (this.projects = this.projects.filter((p) => p.projectId !== project.projectId))
       );
+  }
+
+  onEdit(start: Date, stop:Date, id: number) {
+    this.projectService
+      .editProject(start, stop, id)
+
+      location.reload()
+      
   }
 
   ngOnInit(): void {
@@ -99,6 +109,23 @@ export class ProjectComponent implements OnInit {
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, this.fileName);
+
+  }
+
+  dohvacanje(project: Project){
+    var p = project.projectId
+
+    if(p == null){
+      p = 0
+    }
+    console.log("ID:" ,p)
+    var inputValue1 = (<HTMLInputElement>document.getElementById("editStartId")).value;
+    var inputValue2 = (<HTMLInputElement>document.getElementById("editStopId")).value;
+    var mydate = new Date(inputValue1);
+    var mydate2 = new Date(inputValue2)
+    this.onEdit(mydate,mydate2,p);
+
+
 
   }
 

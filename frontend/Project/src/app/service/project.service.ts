@@ -29,6 +29,19 @@ export class ProjectService {
 
   deleteProject(project: Project): Observable<Project> {
     const url = `${this.getUrl}/${project.projectId}`;
+    console.log("brisanje ",url)
     return this.http.delete<Project>(url);
+  }
+
+  editProject(start: Date, stop: Date, id:number) {
+    var p: Project = {
+      projectName: "aaaaaaaaaaaaa",
+      projectDuration: "1",
+      projectStart: new Date(start),
+      projectStop: new Date(stop),
+      projectId: id
+    }
+    var url = `${this.getUrl}/${p.projectId}`;
+    return this.http.put<Project>(url, p);
   }
 }
