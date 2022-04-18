@@ -37,10 +37,9 @@ export class ProjectComponent implements OnInit {
       
       if(result){
 
-        this.projectStart = new Date()
+        this.projectStop = new Date()
         this.projects.pop();
         
-        //let diffMs = this.projectStop.getTime() - this.projectStart.getTime(); // milliseconds
         let diffMs = (new Date().getTime()) - this.projectStart.getTime(); // milliseconds
         let diffDays = Math.floor(diffMs / 86400000); // days
         let diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
@@ -88,12 +87,10 @@ export class ProjectComponent implements OnInit {
       );
   }
 
-  onEdit(start: Date, stop:Date, id: number) {
+  onEdit(id: number,name:string,start: Date, stop:Date) {
     this.projectService
-      .editProject(start, stop, id)
-
-      location.reload()
-      
+    .editProject(id,name,start, stop)
+    //location.reload()
   }
 
   ngOnInit(): void {
@@ -114,19 +111,17 @@ export class ProjectComponent implements OnInit {
 
   dohvacanje(project: Project){
     var p = project.projectId
-
     if(p == null){
       p = 0
     }
     console.log("ID:" ,p)
-    var inputValue1 = (<HTMLInputElement>document.getElementById("editStartId")).value;
-    var inputValue2 = (<HTMLInputElement>document.getElementById("editStopId")).value;
-    var mydate = new Date(inputValue1);
-    var mydate2 = new Date(inputValue2)
-    this.onEdit(mydate,mydate2,p);
-
-
-
+    var inputValue1 = (<HTMLInputElement>document.getElementById("editNameId")).value;
+    var inputValue2 = (<HTMLInputElement>document.getElementById("editStartId")).value;
+    var inputValue3 = (<HTMLInputElement>document.getElementById("editStopId")).value;
+    var mydate = new Date(inputValue2);
+    var mydate2 = new Date(inputValue3)
+    console.log(inputValue1);
+    this.onEdit(p,inputValue1,mydate,mydate2);
+   
   }
-
 }

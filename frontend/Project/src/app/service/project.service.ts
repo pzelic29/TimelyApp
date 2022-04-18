@@ -33,15 +33,22 @@ export class ProjectService {
     return this.http.delete<Project>(url);
   }
 
-  editProject(start: Date, stop: Date, id:number) {
+  editProject( id:number,name:string,start: Date, stop: Date) {
     var p: Project = {
-      projectName: "aaaaaaaaaaaaa",
-      projectDuration: "1",
+      projectId: id,
+      projectName: name,
       projectStart: new Date(start),
       projectStop: new Date(stop),
-      projectId: id
+      projectDuration: "",
+      
     }
+
+    console.log("project: ",p)
+    
     var url = `${this.getUrl}/${p.projectId}`;
-    return this.http.put<Project>(url, p);
+    console.log("putanja: ",url)
+    var res = this.http.put<Project>(url, p,httpOptions);
+    console.log(res)
+    return res;
   }
 }

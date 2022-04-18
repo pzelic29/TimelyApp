@@ -2,6 +2,9 @@
 <app-button color="{{ clicked ? 'red' : 'green' }}"
 text="{{ clicked ? 'Stop' : 'Start' }}" (btnClick)="onStartStop()"></app-button>
 <div class ="container">
+    <div class="col-md-12 bg-light text-right">
+        <button (click)="ExportToExcel()" class="btn btn-info">Export to Excel</button>
+    </div>
     <div class = "card">
         <h3 class="text-center"> Project List</h3>
         <div class = "card-body">
@@ -24,6 +27,7 @@ text="{{ clicked ? 'Stop' : 'Start' }}" (btnClick)="onStartStop()"></app-button>
                         <div style="display: inline-block;">
                             <td>
                                 <div>Edit</div>
+                                <input type="text" id="editNameId" class="form-control" placeholder="Edit name...">
                                 <input type="datetime-local" id="editStartId" class="form-control">
                                 <input type="datetime-local" id="editStopId" class="form-control">
                                 <button (click)="dohvacanje(project)" class="btn btn-info">Edit</button>

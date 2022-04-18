@@ -1,4 +1,3 @@
-<p>dialog works!</p>
 <div mat-dialog-content>
     <p>Project name:</p>
     <mat-form-field>
@@ -6,6 +5,5 @@
     </mat-form-field>
   </div>
   <div mat-dialog-actions >
-      <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="data.projectName" cdkFocusInitial>Ok</button>
+    <button mat-button [mat-dialog-close]="data.projectName" cdkFocusInitial class="btn btn-success">Stop timer</button>
   </div>
